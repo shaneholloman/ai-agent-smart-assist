@@ -1,0 +1,10 @@
+Invoice #INV-2024-052
+Billing Date: March 15, 2024
+Due Date: March 30, 2024
+
+To: Acme Corporation
+Amount Due: $5,200.00
+
+Itemized:
+- Consulting Services: $5,000
+- Tax (4%): $200

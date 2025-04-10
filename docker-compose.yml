@@ -1,0 +1,13 @@
+version: "3.10"
+
+services:
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./langchain_ai_agent:/app/langchain_ai_agent
+      - ./gcp-service-account.json:/app/gcp-service-account.json:ro
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/app/gcp-service-account.json
+    command: uvicorn langchain_ai_agent.api.main:app --host 0.0.0.0 --port 8000

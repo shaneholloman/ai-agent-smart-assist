@@ -1,0 +1,2 @@
+LangChain is a powerful framework for building LLM-powered applications.
+It helps with retrieval, reasoning, tools, and memory.

@@ -1,0 +1,9 @@
+Patient: Alice Smith
+DOB: 1985-07-21
+
+Diagnosis: Acute bronchitis
+Prescriptions:
+- Azithromycin 500mg
+- Ibuprofen 200mg
+
+Follow-up recommended in 7 days. Patient advised rest and hydration.

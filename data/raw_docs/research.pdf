@@ -1,0 +1,6 @@
+Title: Large Language Models Are Few-Shot Learners
+
+Abstract:
+We demonstrate that language models can perform NLP tasks with little or no task-specific training data. This few-shot learning behavior emerges in models with over 100B parameters...
+
+Keywords: GPT-3, few-shot, NLP, transformers

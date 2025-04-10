@@ -1,0 +1,10 @@
+John Doe
+123 Main St, Boston, MA
+Email: john.doe@example.com
+
+Experience:
+- Software Engineer at Google (2019–2023)
+- Intern at Microsoft (2018)
+
+Skills: Python, JavaScript, React, AWS, Docker
+Education: B.S. in Computer Science, Northeastern University
