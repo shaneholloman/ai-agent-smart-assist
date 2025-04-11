@@ -16,7 +16,7 @@ class DocumentIngestor:
         self.config = self._load_config(config_path)
         self.chunk_size = self.config.get("chunk_size", 500)
         self.chunk_overlap = self.config.get("chunk_overlap", 50)
-        self.supported_extensions = set(self.config.get("supported_extensions", [".pdf", ".docx", ".txt", ".eml"]))
+        self.supported_extensions = set(self.config.get("supported_extensions", [".pdf", ".docx", ".txt", ".eml", ".html"]))
         self.text_splitter = RecursiveCharacterTextSplitter(
             chunk_size=self.chunk_size,
             chunk_overlap=self.chunk_overlap

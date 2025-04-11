@@ -4,6 +4,7 @@ langchain-core>=0.1.34
 langchain-community>=0.0.30
 langchain-cli>=0.0.17
 langchain-google-vertexai>=2.0.19
+langgraph==0.3.23
 
 # LLMs (replace OpenAI if using local models)
 openai>=1.14.2            # Optional, used in fallback
@@ -38,6 +39,7 @@ PyYAML>=6.0.1
 
 # Optional (for streaming APIs or local inference)
 httpx>=0.27.0
+operators>=1.0.1
 
 # Logging (builtin, but optionally enhance with better trace tools)
 loguru>=0.7.2
