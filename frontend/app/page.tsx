@@ -12,6 +12,7 @@ import ErrorBanner from "@/components/ErrorBanner"
 import FileUploader from "@/components/FileUploader"
 import LoadingSpinner from "@/components/LoadingSpinner"
 import "@/app/globals.css"
+import { useRef, useEffect } from "react"
 
 type AgentResponse = {
   task: string
@@ -35,6 +36,7 @@ export default function HomePage() {
   const [mode, setMode] = useState<"classify" | "ingest">("classify")
   const [question, setQuestion] = useState("")
   const [queryResults, setQueryResults] = useState<string[]>([])
+  const threadIdRef = useRef<string | null>(null)
 
   const handleClearAll = () => {
     setText("")
@@ -44,6 +46,16 @@ export default function HomePage() {
     setPipelineStatus(null)
     setQueryResults([])
   }
+
+  useEffect(() => {
+      // Load thread_id from localStorage or create a new one
+      let savedThreadId = localStorage.getItem("rag_thread_id")
+      if (!savedThreadId) {
+        savedThreadId = crypto.randomUUID()
+        localStorage.setItem("rag_thread_id", savedThreadId)
+      }
+      threadIdRef.current = savedThreadId
+    }, [])
 
   const handleRunAgent = async () => {
     setError(null)
@@ -106,8 +118,9 @@ export default function HomePage() {
     setLoading(true)
 
     try {
+      const threadId = threadIdRef.current
       const res = await fetch(
-        `http://localhost:8000/api/query?question=${encodeURIComponent(question)}&namespace=default`
+        `http://localhost:8000/api/query?question=${encodeURIComponent(question)}&namespace=default&thread_id=${threadId}`
       )
 
       if (!res.ok) {

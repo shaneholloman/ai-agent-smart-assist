@@ -4,18 +4,17 @@ import unittest
 from pathlib import Path
 import shutil
 from langchain_ai_agent.retriever.vector_store import DocumentEmbedder
-from uuid import uuid4
 from dotenv import load_dotenv
+
 load_dotenv()
 
 
 class TestDocumentEmbedder(unittest.TestCase):
     def setUp(self):
-        # Use a temporary directory for FAISS index persistence
+        # Create a temporary FAISS index directory for testing
         self.test_index_path = Path("tests/test_faiss_index")
         self.embedder = DocumentEmbedder(persist_dir=str(self.test_index_path))
 
-        # Sample chunked documents
         self.sample_chunks = [
             {
                 "chunk_id": 0,
@@ -34,41 +33,40 @@ class TestDocumentEmbedder(unittest.TestCase):
         ]
 
     def tearDown(self):
-        # Clean up test index directory
+        # Clean up the test FAISS directory
         if self.test_index_path.exists():
             shutil.rmtree(self.test_index_path)
 
-    def test_build_index(self):
+    def test_build_index_successfully(self):
         self.embedder.build_or_update_index(self.sample_chunks)
         retriever = self.embedder.get_retriever()
         self.assertIsNotNone(retriever)
 
-        # Get FAISS index shape
-        index = self.embedder.vector_store.index
-        self.assertEqual(index.d, 384)  # Confirm vector dimensionality
-        self.assertEqual(index.ntotal, 2)  # Confirm number of stored vectors
+        # Access internal FAISS index
+        index = self.embedder._vector_store.index
+        self.assertEqual(index.d, 384)
+        self.assertEqual(index.ntotal, 2)
 
-    def test_duplicate_chunks_are_ignored(self):
+    def test_deduplication_skips_duplicates(self):
         self.embedder.build_or_update_index(self.sample_chunks)
-        self.embedder.build_or_update_index(self.sample_chunks)  # Same chunks again
+        self.embedder.build_or_update_index(self.sample_chunks)  # Add same again
         retriever = self.embedder.get_retriever()
-        docs = retriever.get_relevant_documents("What is LangChain?")
-        self.assertTrue(len(docs) <= 2)
+        results = retriever.get_relevant_documents("LangChain vector search")
+        self.assertLessEqual(len(results), 2)
 
-    def test_query_returns_results(self):
+    def test_query_returns_documents(self):
         self.embedder.build_or_update_index(self.sample_chunks)
-        results = self.embedder.query("How do I use LangChain?")
+        results = self.embedder.query("How does LangChain work?")
         self.assertGreater(len(results), 0)
         self.assertIn("LangChain", results[0].page_content)
 
-    def test_reject_empty_chunks(self):
+    def test_build_index_empty_input(self):
         with self.assertRaises(ValueError):
             self.embedder.build_or_update_index([])
 
-    def test_invalid_chunk_schema(self):
-        invalid_chunks = [{"text": "Missing keys"}]
+    def test_schema_validation_raises(self):
         with self.assertRaises(Exception):
-            self.embedder.build_or_update_index(invalid_chunks)
+            self.embedder.build_or_update_index([{"text": "Missing metadata"}])
 
 
 if __name__ == "__main__":
