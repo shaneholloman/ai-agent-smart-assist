@@ -48,14 +48,14 @@ export default function HomePage() {
   }
 
   useEffect(() => {
-      // Load thread_id from localStorage or create a new one
-      let savedThreadId = localStorage.getItem("rag_thread_id")
-      if (!savedThreadId) {
-        savedThreadId = crypto.randomUUID()
-        localStorage.setItem("rag_thread_id", savedThreadId)
-      }
-      threadIdRef.current = savedThreadId
-    }, [])
+    // Load thread_id from localStorage or create a new one
+    let savedThreadId = localStorage.getItem("rag_thread_id")
+    if (!savedThreadId) {
+      savedThreadId = crypto.randomUUID()
+      localStorage.setItem("rag_thread_id", savedThreadId)
+    }
+    threadIdRef.current = savedThreadId
+  }, [])
 
   const handleRunAgent = async () => {
     setError(null)
@@ -164,13 +164,13 @@ export default function HomePage() {
         mode={mode}
       />
 
-      <main className="flex-1 p-8 overflow-y-auto bg-gray-50">
+      <main className="flex-1 p-8 overflow-y-auto bg-gray-50 dark:bg-gray-900">
         <h1 className="text-2xl font-semibold mb-6">🧠 Document Classifier Playground</h1>
 
         {/* Mode selector + Clear */}
         <div className="mb-6 flex items-center justify-between">
           <div>
-            <label className="block mb-2 font-medium text-sm text-gray-700">Choose Mode</label>
+            <label className="block mb-2 font-medium text-sm text-gray-700 dark:text-white">Choose Mode</label>
             <select
               value={mode}
               onChange={(e) => setMode(e.target.value as "classify" | "ingest")}
