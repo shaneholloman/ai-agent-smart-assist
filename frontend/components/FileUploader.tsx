@@ -35,19 +35,21 @@ export default function FileUploader({ onUpload, disabled, multiple = true, mode
       onDragLeave={() => setDragOver(false)}
       onDrop={handleDrop}
       className={`border-2 border-dashed rounded-xl p-6 text-center cursor-pointer transition ${
-        dragOver ? "border-blue-500 bg-blue-50" : "border-gray-300 bg-white"
-      }`}
+           dragOver
+             ? "border-blue-500 bg-blue-100 dark:border-blue-400 dark:bg-blue-900"
+             : "border-gray-300 bg-white dark:border-gray-600 dark:bg-gray-800"
+        }`}
       onClick={() => fileInputRef.current?.click()}
     >
-      <p className="text-sm text-gray-500 mb-1">
+      <p className="text-sm text-gray-500 dark:text-gray-300 mb-1">
         Drag and drop file(s) here or click to select
       </p>
-      <p className="text-xs text-gray-400 mb-3">
+      <p  className="text-xs text-gray-400 dark:text-gray-500 mb-3">
         {mode === "ingest"
           ? "📚 These files will be added to the knowledge base."
           : "🧠 These files will be extracted and classified."}
       </p>
-      <Button type="button" disabled={disabled}>
+      <Button type="button" disabled={disabled} variant="secondary">
         Browse Files
       </Button>
       <input
