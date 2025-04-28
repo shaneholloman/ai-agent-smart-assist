@@ -10,6 +10,9 @@ No rocket science — just upload stuff, click buttons, and the agent does the r
 
 ---
 
+![Visualization of the codebase](./diagram.svg)
+
+
 ### 🔍 What can it do?
 
 #### 1. Classify
