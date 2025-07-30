@@ -89,6 +89,3 @@ I will next:
 - Maybe connect to Google Drive or Slack
 
 ---
-
-Let me know if you want a CLI version, Docker setup, or even a public demo URL.  
-This is my AI sidekick — just getting started 💪
