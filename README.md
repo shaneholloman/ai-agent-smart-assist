@@ -1,6 +1,6 @@
 ## LangChain AI Agent — Your Smart Assistant 🚀
 
-Hey there! This project is my own **AI agent** powered by LangChain. It's built to help with:
+Hey there! This project is **AI agent** powered by LangChain. It's built to help with:
 
 - 🧠 Classifying text and routing it to the right logic
 - 📚 Adding files to a searchable knowledge base
